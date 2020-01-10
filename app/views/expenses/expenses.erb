@@ -1,0 +1,27 @@
+<h1>Hi, <%= current_user.username.capitalize %>!</h1> 
+<br>
+<h2>Your total expenses are $<%= current_user.total_amount %>.</h2>
+
+      <table class="table table-hover table-striped" >
+      <tr class="info">
+        <th><h3>Description</h3></th>
+        <th><h3>Amount</h3></th>
+        <th><h3>Date</h3></th>
+        <th><h3>Category</h3></th>
+        <th><h3></h3></th>
+      </tr>
+        <% current_user.expenses_sort_by_date.each do |expense| %>
+          <tr style="text-align:left;">
+            <td><a href="expenses/<%= expense.id %>"><%= expense.description %></a></td>
+            <td>$ <%= expense.amount %></td>
+            <td><%= expense.date %></td>
+            <td><a href="categories/<%= expense.category.id %>"><%= expense.category.name %></a></td>
+            <td><a href="expenses/<%= expense.id %>/edit">Edit <span class="glyphicon glyphicon-pencil"></span></a></td>
+          </tr>
+        <% end %>
+      </table>
+
+
+      <p>Did you spend again?</p>
+      <br>
+      <a href="/expenses/new">Add new expense</a>
